@@ -98,9 +98,63 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Page Principale - Ma Garderie'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Ma Garderie'),
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.teal),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(Icons.child_care, size: 48, color: Colors.white),
+                  SizedBox(height: 8),
+                  Text(
+                    'Ma Garderie',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Accueil'),
+            ),
+            ListTile(
+              leading: Icon(Icons.extension),
+              title: Text('Activités'),
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('À propos'),
+            ),
+          ],
+        ),
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        alignment: Alignment.center,
+        child: const Text(
+          'Espace destiné à la liste des activités',
+          style: TextStyle(fontSize: 16, color: Colors.grey),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
       ),
     );
   }
