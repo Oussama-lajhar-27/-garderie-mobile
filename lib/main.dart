@@ -96,6 +96,39 @@ class _SplashScreenState extends State<SplashScreen> {
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  final List<Map<String, dynamic>> activites = const [
+    {
+      "id": 1,
+      "titre": "Dessin et coloriage",
+      "description": "Développement de la créativité",
+      "icone": "🎨"
+    },
+    {
+      "id": 2,
+      "titre": "Jeux éducatifs",
+      "description": "Apprentissage par le jeu",
+      "icone": "🧩"
+    },
+    {
+      "id": 3,
+      "titre": "Musique et chansons",
+      "description": "Éveil musical des enfants",
+      "icone": "🎵"
+    },
+    {
+      "id": 4,
+      "titre": "Lecture de contes",
+      "description": "Découverte des histoires",
+      "icone": "📚"
+    },
+    {
+      "id": 5,
+      "titre": "Activités sportives",
+      "description": "Développement de la motricité",
+      "icone": "⚽"
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,13 +175,30 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        alignment: Alignment.center,
-        child: const Text(
-          'Espace destiné à la liste des activités',
-          style: TextStyle(fontSize: 16, color: Colors.grey),
-        ),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(12),
+        itemCount: activites.length,
+        itemBuilder: (context, index) {
+          final activite = activites[index];
+          return Card(
+            elevation: 2,
+            margin: const EdgeInsets.symmetric(vertical: 6),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.teal.shade50,
+                child: Text(
+                  activite['icone'],
+                  style: const TextStyle(fontSize: 22),
+                ),
+              ),
+              title: Text(
+                activite['titre'],
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(activite['description']),
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
