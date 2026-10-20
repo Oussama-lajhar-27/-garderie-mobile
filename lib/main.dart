@@ -93,8 +93,15 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String _selectedMenu = 'Accueil';
 
   final List<Map<String, dynamic>> activites = const [
     {
@@ -129,6 +136,25 @@ class HomePage extends StatelessWidget {
     }
   ];
 
+  void _afficherMessage(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  void _selectionnerMenu(String menu) {
+    setState(() {
+      _selectedMenu = menu;
+    });
+    Navigator.pop(context); // يغلق القائمة الجانبية بعد الاختيار
+    _afficherMessage('Section sélectionnée : $menu');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,8 +166,8 @@ class HomePage extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const [
-            DrawerHeader(
+          children: [
+            const DrawerHeader(
               decoration: BoxDecoration(color: Colors.teal),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,16 +187,25 @@ class HomePage extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Accueil'),
+              leading: const Icon(Icons.home),
+              title: const Text('Accueil'),
+              selected: _selectedMenu == 'Accueil',
+              selectedColor: Colors.teal,
+              onTap: () => _selectionnerMenu('Accueil'),
             ),
             ListTile(
-              leading: Icon(Icons.extension),
-              title: Text('Activités'),
+              leading: const Icon(Icons.extension),
+              title: const Text('Activités'),
+              selected: _selectedMenu == 'Activités',
+              selectedColor: Colors.teal,
+              onTap: () => _selectionnerMenu('Activités'),
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('À propos'),
+              leading: const Icon(Icons.info),
+              title: const Text('À propos'),
+              selected: _selectedMenu == 'À propos',
+              selectedColor: Colors.teal,
+              onTap: () => _selectionnerMenu('À propos'),
             ),
           ],
         ),
@@ -196,12 +231,14 @@ class HomePage extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               subtitle: Text(activite['description']),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => _afficherMessage(activite['titre']),
             ),
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => _afficherMessage('Nouvelle activité'),
         backgroundColor: Colors.teal,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
