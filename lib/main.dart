@@ -14,7 +14,7 @@ class MaGarderieApp extends StatelessWidget {
       title: 'Ma Garderie',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const SplashScreen(),
@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal.shade50,
+      backgroundColor: Colors.blue.shade50,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(24),
               child: Image.network(
-                'https://cdn-icons-png.flaticon.com/512/2821/2821637.png',
+                'https://pittapattadaynursery.co.uk/wp-content/uploads/2024/12/Screenshot_2024-12-10_at_19.30.07-removebg-preview.png',
                 width: 150,
                 height: 150,
                 fit: BoxFit.cover,
@@ -63,13 +63,13 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: 150,
                     height: 150,
                     decoration: BoxDecoration(
-                      color: Colors.teal.shade100,
+                      color: Colors.blue.shade100,
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: const Icon(
                       Icons.child_care,
                       size: 90,
-                      color: Colors.teal,
+                      color: Colors.blue,
                     ),
                   );
                 },
@@ -81,11 +81,11 @@ class _SplashScreenState extends State<SplashScreen> {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.teal,
+                color: Colors.blue,
               ),
             ),
             const SizedBox(height: 16),
-            const CircularProgressIndicator(color: Colors.teal),
+            const CircularProgressIndicator(color: Colors.blue),
           ],
         ),
       ),
@@ -151,95 +151,159 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedMenu = menu;
     });
-    Navigator.pop(context); // يغلق القائمة الجانبية بعد الاختيار
+    Navigator.pop(context);
     _afficherMessage('Section sélectionnée : $menu');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue.shade600,
       appBar: AppBar(
         title: const Text('Ma Garderie'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blue.shade600,
         foregroundColor: Colors.white,
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: CircleAvatar(
+              backgroundColor: Colors.orange.shade200,
+              child: const Icon(Icons.person, color: Colors.white),
+            ),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.teal),
+              decoration: BoxDecoration(color: Colors.blue),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(Icons.child_care, size: 48, color: Colors.white),
-                  SizedBox(height: 8),
-                  Text(
-                    'Ma Garderie',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+                
               ),
             ),
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text('Accueil'),
               selected: _selectedMenu == 'Accueil',
-              selectedColor: Colors.teal,
+              selectedColor: Colors.blue,
               onTap: () => _selectionnerMenu('Accueil'),
             ),
             ListTile(
               leading: const Icon(Icons.extension),
               title: const Text('Activités'),
               selected: _selectedMenu == 'Activités',
-              selectedColor: Colors.teal,
+              selectedColor: Colors.blue,
               onTap: () => _selectionnerMenu('Activités'),
             ),
             ListTile(
               leading: const Icon(Icons.info),
               title: const Text('À propos'),
               selected: _selectedMenu == 'À propos',
-              selectedColor: Colors.teal,
+              selectedColor: Colors.blue,
               onTap: () => _selectionnerMenu('À propos'),
             ),
           ],
         ),
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: activites.length,
-        itemBuilder: (context, index) {
-          final activite = activites[index];
-          return Card(
-            elevation: 2,
-            margin: const EdgeInsets.symmetric(vertical: 6),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.teal.shade50,
-                child: Text(
-                  activite['icone'],
-                  style: const TextStyle(fontSize: 22),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(top: 10),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
                 ),
               ),
-              title: Text(
-                activite['titre'],
-                style: const TextStyle(fontWeight: FontWeight.bold),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'BONJOUR ',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                                letterSpacing: 1.2,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              'Quelle activité\naujourd\'hui ?',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(height: 1),
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(12),
+                      itemCount: activites.length,
+                      itemBuilder: (context, index) {
+                        final activite = activites[index];
+                        return Card(
+                          elevation: 1,
+                          color: Colors.grey.shade50,
+                          margin: const EdgeInsets.symmetric(vertical: 6),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.blue.shade50,
+                              child: Text(
+                                activite['icone'],
+                                style: const TextStyle(fontSize: 22),
+                              ),
+                            ),
+                            title: Text(
+                              activite['titre'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                            subtitle: Text(
+                              activite['description'],
+                              style: const TextStyle(fontSize: 13),
+                            ),
+                            trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+                            onTap: () => _afficherMessage(activite['titre']),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-              subtitle: Text(activite['description']),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => _afficherMessage(activite['titre']),
             ),
-          );
-        },
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _afficherMessage('Nouvelle activité'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),
